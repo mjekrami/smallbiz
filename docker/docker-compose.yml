@@ -1,0 +1,17 @@
+services:
+  smallbiz:
+    hostname: smallbiz
+    build:
+      context: .
+    ports:
+      - 8080:8080
+  smallbiz-front:
+    hostname: smallbiz-front
+    build:
+      context: .
+  postgres:
+    image: postgres
+    ports:
+    - 5432:5432
+    hostname: postgres
+    container_name: postgres

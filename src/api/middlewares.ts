@@ -1,7 +1,9 @@
 import {
   defineMiddlewares,
   authenticate,
+  validateAndTransformBody,
 } from "@medusajs/framework/http"
+import { AdminCreateProduct } from "@medusajs/medusa/api/admin/products/validators"
 
 export default defineMiddlewares({
   routes: [
@@ -20,5 +22,14 @@ export default defineMiddlewares({
         authenticate("vendor", ["session", "bearer"]),
       ],
     },
+    {
+      matcher: "/vendors/products",
+      method: "POST",
+      middlewares: [
+        authenticate("vendor", ["session", "bearer"]),
+        validateAndTransformBody(AdminCreateProduct),
+      ],
+    },
+
   ],
 })
